@@ -1,0 +1,17 @@
+Description: Removed unwanted jar dependencies from tarball
+Author: Andrea Ceccanti <andrea.ceccanti@cnaf.infn.it>
+--- a/src/main/assemblies/assembly.xml
++++ b/src/main/assemblies/assembly.xml
+@@ -10,12 +10,6 @@
+     <format>tar.gz</format>
+   </formats>
+ 
+-  <dependencySets>
+-    <dependencySet>
+-      <outputDirectory>/share/java</outputDirectory>
+-    </dependencySet>
+-  </dependencySets>
+-
+   <fileSets>
+     <fileSet>
+       <directory>${project.build.directory}</directory>
