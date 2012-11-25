@@ -18,7 +18,14 @@ mirror_conf_url=https://raw.github.com/italiangrid/build-settings/master/maven/c
 # name of the mirror settings file 
 mirror_conf_name=mirror-settings.xml
 
-mvn_settings=-s $(mirror_conf_name)
+# directory where jar deps will be searched for
+libs_dir=/var/lib/$(name)/lib
+
+# name of the jar files which make the dependencies
+jar_names=voms-clients bcprov-1.46 bcmail-1.46 canl voms-api-java3 commons-io commons-lang commons-cli
+
+# mvn settings passed to build
+mvn_settings=-s $(mirror_conf_name) -Dvoms-clients.libs=$(libs_dir)
 
 .PHONY: clean deb
 
@@ -44,6 +51,7 @@ prepare-deb-files: prepare-sources
 	sed -e 's#@@DEB_VERSION@@#$(deb_version)-$(deb_age)#g' debian/changelog.in > debian/changelog
 	sed -e 's#@@POM_VERSION@@#$(pom_version)#g' debian/$(name).install.in > debian/$(name).install
 	sed -e 's#@@POM_VERSION@@#$(pom_version)#g' debian/$(name).links.in > debian/$(name).links
+	sed -e 's#@@JAR_NAMES@@#$(jar_names)#g' debian/$(name).postinst.in > debian/$(name).postinst
 	sed -e 's#@@MVN_SETTINGS@@#$(mvn_settings)#g' debian/rules.in > debian/rules && chmod 755 debian/rules
 	cp -r debian $(name)-$(deb_version)
 	tar -r -f $(name)-$(deb_version)/$(name)_$(deb_version).tar $(name)-$(deb_version)/debian && gzip $(name)-$(deb_version)/$(name)_$(deb_version).tar
