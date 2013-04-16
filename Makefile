@@ -2,7 +2,7 @@ name=voms-clients3
 tag=master
 
 # the GitHub repo where source tarball will be fetched from
-git=git://github.com/andreaceccanti/voms-clients.git
+git=git://github.com/italiangrid/voms-clients.git
 
 # needed dirs
 debbuild_dir=$(shell pwd)/debbuild
