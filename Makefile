@@ -9,8 +9,8 @@ debbuild_dir=$(shell pwd)/debbuild
 
 # determine the pom version and set the deb version
 pom_version=$(shell grep "<version>" $(name)-$(deb_version)/pom.xml | head -1 | sed -e 's/<version>//g' -e 's/<\/version>//g' -e "s/[ \t]*//g")
-deb_version=3.0.3
-deb_age=1
+deb_version=3.0.4
+deb_age=0
 
 # mvn settings mirror conf url
 mirror_conf_url=https://raw.github.com/italiangrid/build-settings/master/maven/cnaf-mirror-settings.xml
